@@ -26,7 +26,7 @@ class NewsRepository {
         break;
 
       case SearchType.KEYWORD:
-        url += '&q=${keyword}&apiKey=${dotenv.get('NEWS_API_TOKEN')}';
+        url += '&q=$keyword&apiKey=${dotenv.get('NEWS_API_TOKEN')}';
         break;
 
       case SearchType.CATEGORY:
@@ -40,7 +40,7 @@ class NewsRepository {
     if (response.statusCode == 200) {
       final responseBody = response.body;
 
-      result = await News.fromJson(jsonDecode(responseBody)).articles;
+      result = News.fromJson(jsonDecode(responseBody)).articles;
     } else {
       throw Exception('Failed to load news.');
     }
