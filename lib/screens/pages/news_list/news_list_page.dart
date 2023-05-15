@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_minpro_newsfeed/models/news.dart';
+import 'package:test_minpro_newsfeed/screens/pages/news_list/components/article_tile.dart';
 
 import '../../../data/category_info.dart';
 import '../../../data/search_type.dart';
@@ -62,9 +64,19 @@ class NewsListPage extends StatelessWidget {
                           )
                         : ListView.builder(
                             itemCount: model.articles.length,
-                            itemBuilder: (context, index) => Text(
-                              model.articles[index].title!,
-                            ),
+                            itemBuilder: (context, index) {
+                              return ArticleTile(
+                                article: model.articles[index],
+                                // onArticleClicked: openArticleWebPage(
+                                //   context: context,
+                                //   article: model.articles[index],
+                                // ),
+                                //
+                                //
+
+                                onArticleClicked: (_) {},
+                              );
+                            },
                           );
                   },
                 ),
@@ -119,4 +131,10 @@ class NewsListPage extends StatelessWidget {
       category: category,
     );
   }
+
+  ///
+  openArticleWebPage({
+    required BuildContext context,
+    required Article article,
+  }) {}
 }
