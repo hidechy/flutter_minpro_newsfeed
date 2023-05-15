@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_minpro_newsfeed/screens/pages/head_line/components/head_line_item.dart';
 import 'package:test_minpro_newsfeed/screens/pages/head_line/components/page_transformer.dart';
 
 import '../../../data/search_type.dart';
@@ -21,13 +22,14 @@ class HeadLinePage extends StatelessWidget {
     }
 
     return Scaffold(
-      body: SafeArea(
+      body: Padding(
+        padding: const EdgeInsets.all(8),
         child: Consumer<HeadLineViewModel>(
           builder: (context, model, child) {
             return PageTransformer(
               pageViewBuilder: (context, resolver) {
                 return PageView.builder(
-                  controller: PageController(),
+                  controller: PageController(viewportFraction: 0.9),
                   itemCount: model.articles.length,
                   itemBuilder: (context, index) {
                     final article = model.articles[index];
@@ -37,17 +39,11 @@ class HeadLinePage extends StatelessWidget {
 
                     return Opacity(
                       opacity: fraction,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Colors.orangeAccent.withOpacity(0.6),
-                        ),
-                        child: Center(
-                          child: Column(
-                            children: [
-                              Text(article.title ?? ''),
-                              Text(article.description ?? ''),
-                            ],
-                          ),
+                      child: Center(
+                        child: HeadLineItem(
+                          article: article,
+                          pageVisibility: visibility,
+                          onArticleClicked: (_) {},
                         ),
                       ),
                     );
