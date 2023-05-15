@@ -1,6 +1,7 @@
 // ignore_for_file: strict_raw_type
 
 import 'package:flutter/material.dart';
+import 'package:test_minpro_newsfeed/screens/pages/news_list/components/article_tile_description.dart';
 
 import '../../../../models/news.dart';
 import 'image_from_url.dart';
@@ -36,14 +37,7 @@ class ArticleTile extends StatelessWidget {
               ),
               Expanded(
                 flex: 3,
-                child: Column(
-                  children: [
-                    Text(article.title ?? ''),
-                    Text(article.publishDate ?? ''),
-                    Text(article.description ?? ''),
-                    Text(article.urlToImage ?? ''),
-                  ],
-                ),
+                child: ArticleTileDescription(article: article),
               ),
             ],
           ),
