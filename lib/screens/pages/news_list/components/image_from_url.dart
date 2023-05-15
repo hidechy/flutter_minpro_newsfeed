@@ -1,8 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// ignore_for_file: avoid_bool_literals_in_conditional_expressions
+
 import 'package:flutter/material.dart';
 
 class ImageFromUrl extends StatelessWidget {
-  const ImageFromUrl({Key? key, this.imageUrl}) : super(key: key);
+  const ImageFromUrl({super.key, this.imageUrl});
 
   final String? imageUrl;
 
@@ -10,18 +11,11 @@ class ImageFromUrl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isInvalidUrl =
-        (imageUrl != null) ? imageUrl!.startsWith("http") : false;
+        (imageUrl != null) ? imageUrl!.startsWith('http') : false;
 
     if (imageUrl == null || imageUrl == '' || !isInvalidUrl) {
-      return Icon(Icons.broken_image);
+      return const Icon(Icons.broken_image);
     } else {
-      // return CachedNetworkImage(
-      //   imageUrl: imageUrl!,
-      //   placeholder: (context, url) => CircularProgressIndicator(),
-      //   errorWidget: (context, url, error) => Icon(Icons.broken_image),
-      //   fit: BoxFit.cover,
-      // );
-
       return FadeInImage.assetNetwork(
         placeholder: 'assets/images/no_image.png',
         image: imageUrl!,

@@ -1,3 +1,5 @@
+// ignore_for_file: type_annotate_public_apis
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_minpro_newsfeed/models/news.dart';
