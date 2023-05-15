@@ -29,8 +29,6 @@ class HeadLineViewModel extends ChangeNotifier {
 
     _articles = await _repository.getNews(searchType: SearchType.HEAD_LINE);
 
-    print(_articles[0].title);
-
     _isLoading = false;
 
     notifyListeners();

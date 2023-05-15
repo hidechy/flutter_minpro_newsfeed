@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_minpro_newsfeed/screens/pages/head_line/components/page_transformer.dart';
 
 import '../../../data/search_type.dart';
 import '../../../viewmodels/head_line_viewmodel.dart';
@@ -20,11 +21,41 @@ class HeadLinePage extends StatelessWidget {
     }
 
     return Scaffold(
-      body: const SafeArea(
-        child: Column(
-          children: [
-            Text('HeadLinePage'),
-          ],
+      body: SafeArea(
+        child: Consumer<HeadLineViewModel>(
+          builder: (context, model, child) {
+            return PageTransformer(
+              pageViewBuilder: (context, resolver) {
+                return PageView.builder(
+                  controller: PageController(),
+                  itemCount: model.articles.length,
+                  itemBuilder: (context, index) {
+                    final article = model.articles[index];
+
+                    final visibility = resolver.resolvePageVisibility(index);
+                    final fraction = visibility.visibleFraction;
+
+                    return Opacity(
+                      opacity: fraction,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.orangeAccent.withOpacity(0.6),
+                        ),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Text(article.title ?? ''),
+                              Text(article.description ?? ''),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
