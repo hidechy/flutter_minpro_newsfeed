@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../models/news.dart';
 
 class ArticleTileDescription extends StatelessWidget {
-  const ArticleTileDescription({Key? key, required this.article})
-      : super(key: key);
+  const ArticleTileDescription({super.key, required this.article});
 
   final Article article;
 
@@ -17,7 +16,7 @@ class ArticleTileDescription extends StatelessWidget {
         Text(article.title ?? ''),
         Text(
           article.publishDate ?? '',
-          style: TextStyle(fontSize: 10),
+          style: const TextStyle(fontSize: 10),
         ),
         Divider(
           color: Colors.grey.withOpacity(0.6),

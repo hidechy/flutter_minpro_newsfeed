@@ -2,12 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_minpro_newsfeed/models/news.dart';
-import 'package:test_minpro_newsfeed/screens/pages/news_list/components/article_tile.dart';
 
 import '../../../data/category_info.dart';
 import '../../../data/search_type.dart';
 import '../../../viewmodels/news_list_viewmodel.dart';
+//import 'package:test_minpro_newsfeed/models/news.dart';
+
+import 'components/article_tile.dart';
 import 'components/category_chips.dart';
 import 'components/news_search_bar.dart';
 
@@ -134,9 +135,9 @@ class NewsListPage extends StatelessWidget {
     );
   }
 
-  ///
-  openArticleWebPage({
-    required BuildContext context,
-    required Article article,
-  }) {}
+// ///
+// openArticleWebPage({
+//   required BuildContext context,
+//   required Article article,
+// }) {}
 }
