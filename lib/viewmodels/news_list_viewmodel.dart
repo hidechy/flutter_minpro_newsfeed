@@ -16,7 +16,7 @@ class NewsListViewModel extends ChangeNotifier {
 
   Category get category => _category;
 
-  String _keyword = "";
+  String _keyword = '';
 
   String get keyword => _keyword;
 
@@ -45,8 +45,6 @@ class NewsListViewModel extends ChangeNotifier {
       keyword: _keyword,
       category: _category,
     );
-
-    print(articles.length);
 
     _isLoading = false;
 

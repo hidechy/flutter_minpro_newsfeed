@@ -1,3 +1,5 @@
+// ignore_for_file: strict_raw_type
+
 import 'package:flutter/material.dart';
 
 import '../../../../data/category_info.dart';
@@ -12,7 +14,7 @@ class CategoryChips extends StatefulWidget {
 }
 
 class _CategoryChipsState extends State<CategoryChips> {
-  var value = 0;
+  int value = 0;
 
   ///
   @override

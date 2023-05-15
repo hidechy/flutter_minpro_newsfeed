@@ -1,38 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_minpro_newsfeed/viewmodels/news_list_viewmodel.dart';
 
 import '../../../data/category_info.dart';
 import '../../../data/search_type.dart';
+import '../../../viewmodels/news_list_viewmodel.dart';
 import 'components/category_chips.dart';
 import 'components/news_search_bar.dart';
 
 class NewsListPage extends StatelessWidget {
-  const NewsListPage({Key? key}) : super(key: key);
+  const NewsListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read<NewsListViewModel>();
+
+    if (!viewModel.isLoading && viewModel.articles.isEmpty) {
+      // TODO setState() or markNeedBuild() called during build
+      // とかいうエラーが出る場合は、「非同期に逃げてやる」とうまくいく
+      // 次のベルトコンベア(16ms後に実行)に乗せてやる、という意味
+
+      // Future(
+      //   () => viewModel.getNews(
+      //     searchType: SearchType.CATEGORY,
+      //     category: categories[0],
+      //   ),
+      // );
+
+      // TODO あるいは下記の方法を使う
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        viewModel.getNews(
+          searchType: SearchType.CATEGORY,
+          category: categories[0],
+        );
+      });
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               NewsSearchBar(
                 onSearch: (keyword) => getKeywordNews(
                   context: context,
-                  keyword: keyword,
+                  keyword: keyword.toString(),
                 ),
               ),
               CategoryChips(
                 onCategorySelected: (category) => getCategoryNews(
                   context: context,
-                  category: category,
+                  category: category as Category,
                 ),
               ),
-              const Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(),
+              Expanded(
+                child: Consumer<NewsListViewModel>(
+                  builder: (context, model, child) {
+                    return model.isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : ListView.builder(
+                            itemCount: model.articles.length,
+                            itemBuilder: (context, index) => Text(
+                              model.articles[index].title!,
+                            ),
+                          );
+                  },
                 ),
               ),
             ],
@@ -62,7 +96,7 @@ class NewsListPage extends StatelessWidget {
   ///
   Future<void> getKeywordNews({
     required BuildContext context,
-    required keyword,
+    required String keyword,
   }) async {
     final viewModel = context.read<NewsListViewModel>();
 

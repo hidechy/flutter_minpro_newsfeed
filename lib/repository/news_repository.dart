@@ -14,9 +14,10 @@ class NewsRepository {
     String? keyword,
     Category? category,
   }) async {
-    List<Article> result = [];
+    var result = <Article>[];
 
-    var url = 'https://newsapi.org/v2/top-headlines?country=jp';
+    // TODO [jp]だと画像のurlが取得できない
+    var url = 'https://newsapi.org/v2/top-headlines?country=us';
 
     http.Response? response;
 
@@ -40,7 +41,8 @@ class NewsRepository {
     if (response.statusCode == 200) {
       final responseBody = response.body;
 
-      result = News.fromJson(jsonDecode(responseBody)).articles;
+      result = News.fromJson(jsonDecode(responseBody) as Map<String, dynamic>)
+          .articles;
     } else {
       throw Exception('Failed to load news.');
     }

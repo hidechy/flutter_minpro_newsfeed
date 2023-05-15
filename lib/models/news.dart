@@ -4,25 +4,16 @@ part 'news.g.dart';
 
 @JsonSerializable()
 class News {
-  final List<Article> articles;
-
   News({required this.articles});
 
   factory News.fromJson(Map<String, dynamic> json) => _$NewsFromJson(json);
+  final List<Article> articles;
 
   Map<String, dynamic> toJson() => _$NewsToJson(this);
 }
 
 @JsonSerializable()
 class Article {
-  final String? title;
-  final String? description;
-  final String? url;
-  final String? urlToImage;
-  @JsonKey(name: "publishedAt")
-  final String? publishDate;
-  final String? content;
-
   Article({
     this.title,
     this.description,
@@ -34,6 +25,13 @@ class Article {
 
   factory Article.fromJson(Map<String, dynamic> json) =>
       _$ArticleFromJson(json);
+  final String? title;
+  final String? description;
+  final String? url;
+  final String? urlToImage;
+  @JsonKey(name: 'publishedAt')
+  final String? publishDate;
+  final String? content;
 
   Map<String, dynamic> toJson() => _$ArticleToJson(this);
 }

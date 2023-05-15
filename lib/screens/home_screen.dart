@@ -5,7 +5,7 @@ import 'pages/head_line_page.dart';
 import 'pages/news_list/news_list_page.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

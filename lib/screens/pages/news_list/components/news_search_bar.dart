@@ -1,9 +1,9 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, strict_raw_type
 
 import 'package:flutter/material.dart';
 
 class NewsSearchBar extends StatelessWidget {
-  NewsSearchBar({Key? key, required this.onSearch}) : super(key: key);
+  NewsSearchBar({super.key, required this.onSearch});
 
   final ValueChanged onSearch;
 
@@ -21,7 +21,6 @@ class NewsSearchBar extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: TextField(
           onSubmitted: onSearch,
-          maxLines: 1,
           controller: textEditingController,
           decoration: const InputDecoration(
             icon: Icon(Icons.search),
