@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_minpro_newsfeed/screens/pages/head_line/components/head_line_item.dart';
-import 'package:test_minpro_newsfeed/screens/pages/head_line/components/page_transformer.dart';
+
+import 'components/head_line_item.dart';
+import 'components/page_transformer.dart';
 
 import '../../../data/search_type.dart';
 import '../../../viewmodels/head_line_viewmodel.dart';
@@ -26,10 +27,16 @@ class HeadLinePage extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: Consumer<HeadLineViewModel>(
           builder: (context, model, child) {
+            if (model.isLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
             return PageTransformer(
               pageViewBuilder: (context, resolver) {
                 return PageView.builder(
-                  controller: PageController(viewportFraction: 0.9),
+                  controller: PageController(viewportFraction: 0.95),
                   itemCount: model.articles.length,
                   itemBuilder: (context, index) {
                     final article = model.articles[index];

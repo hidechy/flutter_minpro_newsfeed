@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_minpro_newsfeed/screens/pages/head_line/components/page_transformer.dart';
+
+import 'page_transformer.dart';
 
 class LazyLoadText extends StatelessWidget {
   const LazyLoadText(
