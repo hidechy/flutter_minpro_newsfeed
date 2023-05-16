@@ -20,11 +20,10 @@ class _AboutUsPageState extends State<AboutUsPage> {
           child: AnimatedContainer(
             width: _selected ? 300 : 100,
             height: _selected ? 100 : 25,
-            duration: Duration(milliseconds: 500),
-            child: AutoSizeText(
-              "NewsFeedApp",
+            duration: const Duration(milliseconds: 500),
+            child: const AutoSizeText(
+              'NewsFeedApp',
               style: TextStyle(fontSize: 40),
-              minFontSize: 12,
               maxLines: 1,
               overflow: TextOverflow.visible,
             ),
@@ -37,7 +36,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
             _selected = !_selected;
           });
         },
-        child: Icon(Icons.play_arrow),
+        child: const Icon(Icons.play_arrow),
       ),
     );
   }
