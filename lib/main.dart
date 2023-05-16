@@ -6,10 +6,14 @@ import 'di/providers.dart';
 import 'models/db/database.dart';
 import 'screens/home_screen.dart';
 
-late MyDatabase myDatabase;
+//))))))))))))))))))))))))) TODO DI変更
+//late MyDatabase myDatabase;
+//))))))))))))))))))))))))) TODO DI変更
 
 void main() async {
-  myDatabase = MyDatabase();
+//))))))))))))))))))))))))) TODO DI変更
+//  myDatabase = MyDatabase();
+//))))))))))))))))))))))))) TODO DI変更
 
   await dotenv.load();
 
