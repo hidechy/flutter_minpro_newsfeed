@@ -1,18 +1,16 @@
 // ignore_for_file: strict_raw_type
 
 import 'package:flutter/material.dart';
+import 'package:test_minpro_newsfeed/screens/news_webpage_screen.dart';
 import 'package:test_minpro_newsfeed/screens/pages/news_list/components/article_tile_description.dart';
 
 import '../../../../models/news.dart';
 import 'image_from_url.dart';
 
 class ArticleTile extends StatelessWidget {
-  const ArticleTile(
-      {super.key, required this.article, required this.onArticleClicked});
+  const ArticleTile({super.key, required this.article});
 
   final Article article;
-
-  final ValueChanged onArticleClicked;
 
   ///
   @override
@@ -25,7 +23,16 @@ class ArticleTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NewsWebpageScreen(
+                  article: article,
+                ),
+              ),
+            );
+          },
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/news.dart';
+import '../../news_webpage_screen.dart';
 import 'components/head_line_item.dart';
 import 'components/page_transformer.dart';
 
@@ -50,7 +52,6 @@ class HeadLinePage extends StatelessWidget {
                         child: HeadLineItem(
                           article: article,
                           pageVisibility: visibility,
-                          onArticleClicked: (_) {},
                         ),
                       ),
                     );
