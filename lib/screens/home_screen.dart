@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'pages/about_us_page.dart';
+import 'pages/about_us/about_us_page.dart';
 import 'pages/head_line/head_line_page.dart';
 import 'pages/news_list/news_list_page.dart';
 
