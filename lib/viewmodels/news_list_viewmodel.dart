@@ -1,12 +1,21 @@
+// ignore_for_file: inference_failure_on_untyped_parameter
+
 import 'package:flutter/material.dart';
-import 'package:test_minpro_newsfeed/models/news.dart';
 
 import '../data/category_info.dart';
 import '../data/search_type.dart';
+import '../models/news.dart';
 import '../repository/news_repository.dart';
 
 class NewsListViewModel extends ChangeNotifier {
-  final NewsRepository _repository = NewsRepository();
+  //))))))))))))))))))))))))) TODO DI変更
+  NewsListViewModel({repository}) : _repository = repository as NewsRepository;
+
+  final NewsRepository _repository;
+
+//  final NewsRepository _repository = NewsRepository();
+
+  //))))))))))))))))))))))))) TODO DI変更
 
   SearchType _searchType = SearchType.CATEGORY;
 

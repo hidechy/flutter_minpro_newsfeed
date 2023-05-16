@@ -1,3 +1,5 @@
+// ignore_for_file: inference_failure_on_untyped_parameter
+
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -6,10 +8,17 @@ import 'package:http/http.dart' as http;
 import '../data/category_info.dart';
 import '../data/search_type.dart';
 import '../extensions/extensions.dart';
-import '../main.dart';
+import '../models/db/dao.dart';
 import '../models/news.dart';
 
 class NewsRepository {
+  //))))))))))))))))))))))))) TODO DI変更
+  NewsRepository({dao}) : _dao = dao as NewsDao;
+
+  final NewsDao _dao;
+
+  //))))))))))))))))))))))))) TODO DI変更
+
   ///
   Future<List<Article>> getNews({
     required SearchType searchType,
@@ -61,11 +70,13 @@ class NewsRepository {
   ///
   Future<List<Article>> insertAndReadNewsFromDB(
       Map<String, dynamic> responseBody) async {
-    final dao = myDatabase.newsDao;
+    //))))))))))))))))))))))))) TODO DI変更
+    // final dao = myDatabase.newsDao;
+
     final articles = News.fromJson(responseBody).articles;
 
     /// TODO DartのモデルクラスからDBのテーブルクラスに変換する
-    final articleRecords = await dao.insertAndReadNewsFromDB(
+    final articleRecords = await _dao.insertAndReadNewsFromDB(
       articles.toArticleRecords(articles),
     );
 
