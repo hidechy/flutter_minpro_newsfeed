@@ -12,7 +12,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _pages = [HeadLinePage(), NewsListPage(), AboutUsPage()];
+  final _pages = [
+    const HeadLinePage(),
+    const NewsListPage(),
+    const AboutUsPage(),
+  ];
 
   int _currentIndex = 0;
 
