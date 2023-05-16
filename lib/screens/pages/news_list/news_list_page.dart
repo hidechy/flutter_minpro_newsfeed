@@ -5,9 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../data/category_info.dart';
 import '../../../data/search_type.dart';
-import '../../../models/news.dart';
 import '../../../viewmodels/news_list_viewmodel.dart';
-import '../../news_webpage_screen.dart';
 import 'components/article_tile.dart';
 import 'components/category_chips.dart';
 import 'components/news_search_bar.dart';

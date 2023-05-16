@@ -4,7 +4,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../models/news.dart';
 
 class NewsWebpageScreen extends StatefulWidget {
-  const NewsWebpageScreen({Key? key, required this.article}) : super(key: key);
+  const NewsWebpageScreen({super.key, required this.article});
 
   final Article article;
 

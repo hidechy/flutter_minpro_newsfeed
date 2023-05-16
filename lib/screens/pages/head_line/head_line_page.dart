@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/news.dart';
-import '../../news_webpage_screen.dart';
-import 'components/head_line_item.dart';
-import 'components/page_transformer.dart';
-
 import '../../../data/search_type.dart';
 import '../../../viewmodels/head_line_viewmodel.dart';
+import 'components/head_line_item.dart';
+import 'components/page_transformer.dart';
 
 class HeadLinePage extends StatelessWidget {
   const HeadLinePage({super.key});
@@ -30,7 +27,7 @@ class HeadLinePage extends StatelessWidget {
         child: Consumer<HeadLineViewModel>(
           builder: (context, model, child) {
             if (model.isLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
