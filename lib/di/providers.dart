@@ -1,3 +1,6 @@
+/// TODO repositoryのChangeNotifier化
+//import 'package:path/path.dart';
+
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -28,22 +31,59 @@ List<SingleChildWidget> dependentModels = [
   ProxyProvider<MyDatabase, NewsDao>(update: (_, db, dao) {
     return NewsDao(db);
   }),
-  ProxyProvider<NewsDao, NewsRepository>(
-    update: (_, dao, repository) {
-      return NewsRepository(dao: dao);
-    },
+
+  /// TODO repositoryのChangeNotifier化
+
+  // ProxyProvider<NewsDao, NewsRepository>(
+  //   update: (_, dao, repository) {
+  //     return NewsRepository(dao: dao);
+  //   },
+  // ),
+
+  ChangeNotifierProvider<NewsRepository>(
+    create: (context) => NewsRepository(
+      dao: context.read<NewsDao>(),
+    ),
   ),
+
+  /// TODO repositoryのChangeNotifier化
 ];
 
 List<SingleChildWidget> viewModels = [
-  ChangeNotifierProvider<HeadLineViewModel>(
+  /// TODO repositoryのChangeNotifier化
+
+  // ChangeNotifierProvider<HeadLineViewModel>(
+  //   create: (context) {
+  //     return HeadLineViewModel(repository: context.read<NewsRepository>());
+  //   },
+  // ),
+
+  ChangeNotifierProxyProvider<NewsRepository, HeadLineViewModel>(
     create: (context) {
       return HeadLineViewModel(repository: context.read<NewsRepository>());
     },
+    update: (context, repository, viewModel) {
+      return viewModel!..onRepositoryUpdated(repository);
+    },
   ),
-  ChangeNotifierProvider<NewsListViewModel>(
+
+  /// TODO repositoryのChangeNotifier化
+
+  /// TODO repositoryのChangeNotifier化
+  // ChangeNotifierProvider<NewsListViewModel>(
+  //   create: (context) {
+  //     return NewsListViewModel(repository: context.read<NewsRepository>());
+  //   },
+  // ),
+
+  ChangeNotifierProxyProvider<NewsRepository, NewsListViewModel>(
     create: (context) {
       return NewsListViewModel(repository: context.read<NewsRepository>());
     },
+    update: (context, repository, viewModel) {
+      return viewModel!..onRepositoryUpdated(repository);
+    },
   ),
+
+  /// TODO repositoryのChangeNotifier化
 ];

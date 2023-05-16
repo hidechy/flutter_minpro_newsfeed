@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/category_info.dart';
+import '../../../data/load_status.dart';
 import '../../../data/search_type.dart';
 import '../../../viewmodels/news_list_viewmodel.dart';
 import 'components/article_tile.dart';
@@ -17,7 +18,9 @@ class NewsListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.read<NewsListViewModel>();
 
-    if (!viewModel.isLoading && viewModel.articles.isEmpty) {
+    /// TODO repositoryのChangeNotifier化
+    if (viewModel.loadStatus != LoadStatus.LOADING &&
+        viewModel.articles.isEmpty) {
       // TODO setState() or markNeedBuild() called during build
       // とかいうエラーが出る場合は、「非同期に逃げてやる」とうまくいく
       // 次のベルトコンベア(16ms後に実行)に乗せてやる、という意味
@@ -59,7 +62,8 @@ class NewsListPage extends StatelessWidget {
               Expanded(
                 child: Consumer<NewsListViewModel>(
                   builder: (context, model, child) {
-                    return model.isLoading
+                    /// TODO repositoryのChangeNotifier化
+                    return model.loadStatus == LoadStatus.LOADING
                         ? const Center(
                             child: CircularProgressIndicator(),
                           )

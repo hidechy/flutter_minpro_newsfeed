@@ -3,19 +3,15 @@
 import 'package:flutter/material.dart';
 
 import '../data/category_info.dart';
+import '../data/load_status.dart';
 import '../data/search_type.dart';
 import '../models/news.dart';
 import '../repository/news_repository.dart';
 
 class NewsListViewModel extends ChangeNotifier {
-  //))))))))))))))))))))))))) TODO DI変更
   NewsListViewModel({repository}) : _repository = repository as NewsRepository;
 
   final NewsRepository _repository;
-
-//  final NewsRepository _repository = NewsRepository();
-
-  //))))))))))))))))))))))))) TODO DI変更
 
   SearchType _searchType = SearchType.CATEGORY;
 
@@ -29,13 +25,23 @@ class NewsListViewModel extends ChangeNotifier {
 
   String get keyword => _keyword;
 
-  bool _isLoading = false;
-
-  bool get isLoading => _isLoading;
+  /// TODO repositoryのChangeNotifier化
+  // bool _isLoading = false;
+  //
+  // bool get isLoading => _isLoading;
+  /// TODO repositoryのChangeNotifier化
 
   List<Article> _articles = [];
 
   List<Article> get articles => _articles;
+
+  /// TODO repositoryのChangeNotifier化
+
+  LoadStatus _loadStatus = LoadStatus.DONE;
+
+  LoadStatus get loadStatus => _loadStatus;
+
+  /// TODO repositoryのChangeNotifier化
 
   ///
   Future<void> getNews({
@@ -47,16 +53,33 @@ class NewsListViewModel extends ChangeNotifier {
     _keyword = keyword ?? '';
     _category = category ?? categories[0];
 
-    _isLoading = true;
+    /// TODO repositoryのChangeNotifier化
 
-    _articles = await _repository.getNews(
+    // _isLoading = true;
+    //
+    // _articles = await _repository.getNews(
+    //   searchType: _searchType,
+    //   keyword: _keyword,
+    //   category: _category,
+    // );
+    //
+    // _isLoading = false;
+    //
+    // notifyListeners();
+
+    await _repository.getNews(
       searchType: _searchType,
       keyword: _keyword,
       category: _category,
     );
 
-    _isLoading = false;
+    /// TODO repositoryのChangeNotifier化
+  }
 
+  ///
+  void onRepositoryUpdated(NewsRepository repository) {
+    _articles = repository.articles;
+    _loadStatus = repository.loadStatus;
     notifyListeners();
   }
 }
